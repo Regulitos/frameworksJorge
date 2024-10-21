@@ -1,8 +1,9 @@
 import React from 'react';
 import Header from '../../components/header/Header.js';
+import fetchApi from '../../utils/fetch.js';
+import TodaysImage from '../../components/todaysImage/TodaysImage.js';
 import { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
-import fetchApi from '../../utils/fetch.js';
 
 function Home() {
     const [imageUrl, setImageUrl] = useState('');
@@ -29,51 +30,20 @@ function Home() {
     }, []);
     return (
         <View style={styles.container}>
-            <Header />
-            <Text style={styles.title}>{title}</Text>
-            <Image
-                source={{ uri: imageUrl }}
-                style={styles.image}
-                resizeMode="contain"
-            />
-            <Text style={styles.fecha}>{copy} {date}</Text>
-            <Text style={styles.texto}>{description}</Text>
+            <Header />           
+            <TodaysImage url={imageUrl} copy={copy} date={date} title={title} description={description}/>          
+            
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: '#22357a',
         flex: 1,
-        paddingHorizontal: 17,
+        paddingHorizontal:17,
         paddingTop: 40
 
-    },
-    image: {
-        height: 320,
-        width: '100%',
-    },
-    title: {
-        fontSize: 25,
-        fontWeight: 'bold',
-        color: 'white',
-        marginBottom: 20,
-        textAlign: 'center',
-    },
-    fecha: {
-        fontSize: 15,
-        fontWeight: 'bold',
-        textAlign: 'right',
-        color: 'white',
-        marginBottom: 20,
-        marginTop: -30
-    },
-    texto: {
-        textAlign: 'justify',
-        fontSize: 19,
-        fontWeight: 'bold',
-        marginBottom: 20,
-        color: 'white'
     }
 });
 export default Home
